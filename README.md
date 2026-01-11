@@ -1,36 +1,27 @@
-## Angular in 90-ish minutes
+# FirstNgApp
 
-Ever wanted to learn Angular quickly? Well, this repository should help. This repository is created alongside the following video tutorial to teach the most important (& core) concepts of Angular:
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
 
-<a href="https://youtu.be/oUmVFHlwZsI" target="_blank" style="margin-inline: auto; max-width: 500px;">
-  <img src="assets/images/banner.png" style="width: 100%;">
-</a>
+## Development server
 
-And if you're looking for a comprehensive guide to master Angular's new reactivity model, check out my book:
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-<a href="https://www.amazon.com/dp/B0FF9LSHJN" target="_blank" style="margin-inline: auto; max-width: 300px; display: block; text-align: center;">
-  <img src="assets/images/mastering-angular-signals.png" style="max-width: 250px;">
-</a>
+## Code scaffolding
 
-> From a Google-Awarded Expert, this is your definitive guide to ending state management headaches and building lightning-fast Angular applications.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-The repository contains both the slides shown in the video, and the application we built during the video as well.
+## Build
 
-## Watching the slides
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-The slides are deployed [here](https://ahsanayaz.github.io/angular-in-90ish/).
+## Running unit tests
 
-## Running the slides locally
-- Clone this repository
-- `npm install`
-- `npm run dev`
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Running end-to-end tests
 
-## Running the app
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-To run the app we built in the video tutorial (the final state):
-- Clone this repository if you haven't
-- `cd first-ng-app`
-- `npm install`
-- `npm start`
-- Navigate to [localhost:4200](http://localhost:4200)
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
