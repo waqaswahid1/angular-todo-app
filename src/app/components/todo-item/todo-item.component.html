@@ -1,13 +1,80 @@
-<li
-  appHighlightCompletedTodo
-  [isCompleted]="todo().completed"
-  class="todos__item"
+<!-- Todo Item -->
+<li 
+  class="group px-6 py-4 hover:bg-slate-50 transition-colors duration-200 cursor-pointer"
+  (click)="todoClicked()"
 >
-  <input
-    id="todo-{{ todo().id }}"
-    type="checkbox"
-    [checked]="todo().completed"
-    (change)="this.todoClicked()"
-  />
-  <label for="todo-{{ todo().id }}">{{ todo().title | uppercase }}</label>
+  <div class="flex items-center gap-4">
+    <!-- Custom Checkbox -->
+    <div class="relative flex-shrink-0">
+      <input
+        id="todo-{{ todo().id }}"
+        type="checkbox"
+        [checked]="todo().completed"
+        (click)="$event.stopPropagation()"
+        (change)="todoClicked()"
+        class="peer sr-only"
+      />
+      <label 
+        for="todo-{{ todo().id }}"
+        class="w-6 h-6 rounded-lg border-2 flex items-center justify-center cursor-pointer transition-all duration-200
+               border-slate-300 bg-white
+               peer-checked:border-primary-500 peer-checked:bg-primary-500
+               hover:border-primary-400
+               peer-focus-visible:ring-4 peer-focus-visible:ring-primary-500/20"
+        (click)="$event.stopPropagation()"
+      >
+        <!-- Checkmark Icon -->
+        <svg 
+          class="w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+          [class.opacity-100]="todo().completed"
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+        </svg>
+      </label>
+    </div>
+
+    <!-- Todo Content -->
+    <div class="flex-1 min-w-0">
+      <p 
+        class="font-medium transition-all duration-200"
+        [class.text-slate-700]="!todo().completed"
+        [class.text-slate-400]="todo().completed"
+        [class.line-through]="todo().completed"
+      >
+        {{ todo().title }}
+      </p>
+      <p class="text-sm text-slate-400 mt-0.5">
+        Task #{{ todo().id }}
+      </p>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="flex-shrink-0">
+      @if (todo().completed) {
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Completed
+        </span>
+      } @else {
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 rounded-full text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Pending
+        </span>
+      }
+    </div>
+
+    <!-- Arrow Icon (shows on hover) -->
+    <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </div>
 </li>

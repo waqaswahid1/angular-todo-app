@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { TodosService } from '../services/todos.service';
 import { Todo } from '../model/todo.type';
 import { catchError } from 'rxjs';
@@ -11,12 +11,17 @@ import { FilterTodosPipe } from '../pipes/filter-todos.pipe';
   standalone: true,
   imports: [TodoItemComponent, FormsModule, FilterTodosPipe],
   templateUrl: './todos.component.html',
-  styleUrl: './todos.component.scss',
 })
 export class TodosComponent implements OnInit {
   todoService = inject(TodosService);
   todoItems = signal<Array<Todo>>([]);
   searchTerm = signal('');
+  isLoading = signal(true);
+
+  // Computed stats
+  totalTodos = computed(() => this.todoItems().length);
+  completedTodos = computed(() => this.todoItems().filter(t => t.completed).length);
+  pendingTodos = computed(() => this.todoItems().filter(t => !t.completed).length);
 
   ngOnInit(): void {
     this.todoService
@@ -24,11 +29,13 @@ export class TodosComponent implements OnInit {
       .pipe(
         catchError((err) => {
           console.log(err);
+          this.isLoading.set(false);
           throw err;
         })
       )
       .subscribe((todos) => {
         this.todoItems.set(todos);
+        this.isLoading.set(false);
       });
   }
 
@@ -44,5 +51,9 @@ export class TodosComponent implements OnInit {
         return todo;
       });
     });
+  }
+
+  clearSearch() {
+    this.searchTerm.set('');
   }
 }

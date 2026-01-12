@@ -1,7 +1,149 @@
-<app-greeting [message]="homeMessage()" />
-<app-counter />
-<input
-  placeholder="Type something..."
-  type="text"
-  (keyup)="keyUpHandler($event)"
-/>
+<!-- Hero Section -->
+<section class="relative overflow-hidden">
+  <!-- Background Decorations -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-primary-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-accent-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-primary-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-20 md:py-32">
+    <div class="text-center max-w-3xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-200 rounded-full text-primary-700 text-sm font-medium mb-8">
+        <span class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></span>
+        Built with Angular & Tailwind CSS
+      </div>
+
+      <!-- Heading -->
+      <h1 class="font-display text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+        Manage Your Tasks
+        <span class="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+          Beautifully
+        </span>
+      </h1>
+
+      <!-- Subheading -->
+      <p class="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+        {{ homeMessage() }}. Stay organized, boost productivity, and achieve your goals with our elegant task management app.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a 
+          routerLink="/todos" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-2xl hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-xl shadow-primary-500/25 hover:shadow-2xl hover:shadow-primary-500/30 hover:-translate-y-1"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          View My Tasks
+        </a>
+        <a 
+          href="#features" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold rounded-2xl border-2 border-slate-200 hover:border-primary-500 hover:text-primary-600 transition-all duration-300"
+        >
+          Learn More
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+        Everything You Need
+      </h2>
+      <p class="text-slate-600 text-lg">
+        Simple yet powerful features to help you stay on top of your tasks.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      @for (feature of features; track feature.title) {
+        <div class="group p-8 bg-slate-50 rounded-3xl hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 border border-transparent hover:border-slate-100">
+          <!-- Icon -->
+          <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-500/25 group-hover:scale-110 transition-transform duration-300">
+            @switch (feature.icon) {
+              @case ('clipboard') {
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              }
+              @case ('check') {
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              }
+              @case ('search') {
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              }
+            }
+          </div>
+          
+          <!-- Content -->
+          <h3 class="font-display text-xl font-semibold text-slate-900 mb-3">
+            {{ feature.title }}
+          </h3>
+          <p class="text-slate-600 leading-relaxed">
+            {{ feature.description }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Demo Section -->
+<section class="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Counter Component -->
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+          Interactive Components
+        </h2>
+        <p class="text-slate-400 text-lg mb-8">
+          Experience the power of Angular's reactive components. Try the counter below!
+        </p>
+        <app-counter />
+      </div>
+
+      <!-- Right: Greeting Component -->
+      <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+        <app-greeting [message]="homeMessage()" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+      Ready to Get Started?
+    </h2>
+    <p class="text-slate-600 text-lg mb-8">
+      Start managing your tasks today and experience the difference.
+    </p>
+    <a 
+      routerLink="/todos" 
+      class="inline-flex items-center gap-2 px-10 py-5 bg-gradient-to-r from-primary-600 to-accent-500 text-white font-semibold text-lg rounded-2xl hover:from-primary-700 hover:to-accent-600 transition-all duration-300 shadow-xl shadow-primary-500/25 hover:shadow-2xl hover:shadow-primary-500/30 hover:-translate-y-1"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+      Go to My Tasks
+    </a>
+  </div>
+</section>
